@@ -2,15 +2,21 @@
 /** Array of all stars on the canvas */
 let stars = [];
 /** Amount of updates per second */
-const updatesPerSecond = 12;
+const updatesPerSecond = 8;
 /** Reference to the canvas that the starfield is drawn on */
 const canvas = document.getElementById("starfield");
 /** The canvas context for drawing */
 const context = canvas.getContext("2d");
 /** Stars per square pixel */
-const starDensity = 1 / 64_000;
+const starDensity = 1 / 20_000;
 /** Flicker rate */
 const flickerRate = 2;
+/** Min Size Multiplier **/
+const minSizeMultiplier = 0.6;
+/** Max Size Multiplier **/
+const maxSizeMultiplier = 6;
+/** Size Multiplier Skew **/
+const sizeMultiplierSkew = 3;
 
 const bufferCanvas = document.createElement("canvas");
 const bufferContext = bufferCanvas.getContext("2d");
@@ -36,16 +42,13 @@ const Star = {
         x, y,
         radius, opacity,
         change,
-        xMultiplier = randomBinomial(0.3, 4, 2),
-        yMultiplier = randomBinomial(0.3, 4, 2),
+        xMultiplier = randomBinomial(minSizeMultiplier, maxSizeMultiplier, sizeMultiplierSkew),
+        yMultiplier = randomBinomial(minSizeMultiplier, maxSizeMultiplier, sizeMultiplierSkew),
     ) => ({
         x, y, radius, opacity, change,
         xMultiplier, yMultiplier
     }),
-    clone: star => ({ ...star }),
-    draw: (star, isForced = false) => {
-        if (!isForced && !Star.isInView(star)) return star;
-
+    draw: star => {
         bufferContext.beginPath(); {
             bufferContext.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
             bufferContext.arc(star.x, star.y, star.radius * 3, 0, 360);
@@ -77,32 +80,32 @@ const Star = {
 
         return star;
     },
-    update: (star, isForced = false) => {
-        if (!isForced && !Star.isInView(star)) return star;
+    update: star => {
         const factor = 1 / updatesPerSecond;
         const newStar = star;
         newStar.change *= (newStar.opacity >= 1 || newStar.opacity <= 0) ? -1 : 1;
-        newStar.opacity += newStar.change * (Math.random() + 0.1) / 5 * flickerRate * factor;
+        newStar.opacity += newStar.change * (Math.random() + 0.2) / 4 * flickerRate * factor;
         return newStar;
     },
-    parallax: (star, movement, isForced = false) => {
-        if (!isForced && !Star.isInView(star)) return star;
-        const random = Math.random() / 175;
-        const newStar = star;
-        newStar.x += random * movement.x;
-        newStar.y += 1.5 * random * movement.y;
-        return newStar;
-    },
-    isInView: star => {
-        const buffer = 100;
-        return (star.y - (star.radius * 2) + buffer) > window.scrollY
-            && (star.y + (star.radius * 2) - buffer)
-            < (window.scrollY + document.documentElement.clientHeight);
+    isInViewport: (star, rect, viewportWidth, viewportHeight) => {
+        const starX = rect.left + star.x;
+        const starY = rect.top + star.y;
+        return starX >= 0 && starX <= viewportWidth && starY >= 0 && starY <= viewportHeight;
     },
 };
 
 /** General update function */
-const update = () => { stars = stars.map(star => Star.update(star)) };
+const update = () => {
+    const rect = canvas.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    stars.forEach(star => {
+        if (Star.isInViewport(star, rect, viewportWidth, viewportHeight)) {
+            Star.update(star);
+        }
+    });
+};
 
 // Gives an array from min to max
 const range = (min, max) => {
@@ -115,7 +118,6 @@ const range = (min, max) => {
 
 const backgroundCanvas = document.createElement("canvas");
 const backgroundContext = backgroundCanvas.getContext("2d");
-const backgroundPosition = {x: 0, y: 0}
 
 const chunk = 32;
 const startHue = 215;
@@ -160,7 +162,7 @@ const backgroundInit = () => {
 const drawBackground = () => {
     const { filter } = bufferContext;
     bufferContext.filter = `blur(${chunk * 2}px)`;
-    bufferContext.drawImage(backgroundCanvas, backgroundPosition.x, backgroundPosition.y);
+    bufferContext.drawImage(backgroundCanvas, 0, 0);
     bufferContext.filter = filter;
 }
 
@@ -171,20 +173,20 @@ const draw = () => {
     bufferContext.globalCompositeOperation = "lighten";
     bufferContext.clearRect(0, 0, bufferCanvas.width, bufferCanvas.height);
     drawBackground();
-    stars.forEach(star => Star.draw(star));
+
+    const rect = canvas.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    stars.forEach(star => {
+        if (Star.isInViewport(star, rect, viewportWidth, viewportHeight)) {
+            Star.draw(star);
+        }
+    });
     window.requestAnimationFrame(draw);
 
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(bufferCanvas, 0, 0);
-}
-
-/** Calculates and draws simple parallax effect */
-const parallax = movement => {
-    stars = stars.map(star => Star.parallax(star, movement));
-
-    const random = Math.random() / 175;
-    backgroundPosition.x += movement.x * random;
-    backgroundPosition.y += movement.y * random;
 }
 
 /** Initializes a new set of stars */
@@ -212,7 +214,7 @@ const init = () => {
         const star = Star.create(x, y, radius, opacity, change);
         stars.push(star);
     }
-    canvas.style.animation = "fadeInAnimation ease 3s";
+    canvas.style.transform = 'translate(-4px, -4px)';
 }
 
 // Initializes stars and attaches proper listeners
@@ -221,10 +223,11 @@ window.setInterval(update, 1000 / updatesPerSecond);
 window.requestAnimationFrame(draw);
 window.addEventListener("resize", init);
 window.addEventListener("mousemove", event => {
-    parallax({
-        x: event.movementX,
-        y: event.movementY
-    });
+    const x = event.clientX / window.innerWidth;
+    const y = event.clientY / window.innerHeight;
+    const moveX = x * 5;
+    const moveY = y * 5;
+    canvas.style.transform = `translate(-${moveX}px, -${moveY}px)`;
 });
 
 // All anchor links will be smooth scrolled to
@@ -235,4 +238,13 @@ document.querySelectorAll("a[href^='#']").forEach(anchor => {
             behavior: "smooth"
         });
     });
+});
+
+window.addEventListener("scroll", () => {
+    const header = document.querySelector("header");
+    if (window.scrollY > 0) {
+        header.classList.add("scrolled");
+    } else {
+        header.classList.remove("scrolled");
+    }
 });

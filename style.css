@@ -27,7 +27,7 @@ summary:hover {
     cursor: pointer;
 }
 
-details[open] summary ~ * {
+details[open] summary~* {
     transform: translateX(10px);
     animation: sweep .5s ease-in-out;
 }
@@ -49,13 +49,29 @@ body {
 }
 
 header {
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     width: 75%;
+    margin: 0 auto;
     padding: 2% 0%;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-around;
+    z-index: 1000;
+    transition: background 1s, box-shadow 1s;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+header.scrolled {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 16px rgba(200, 200, 200, 0.2);
+    backdrop-filter: blur(8px);
+    transition: background 1s, box-shadow 1s, backdrop-filter 1s;
+
 }
 
 header #brand {
@@ -105,21 +121,12 @@ main section {
     align-items: center;
 }
 
-main section > img {
+main section>img {
     max-width: 20rem;
     width: 100%;
     padding: 2rem;
     animation: white-image-glow 3s ease-in-out infinite alternate,
         floating 5s ease-in-out infinite;
-}
-
-main section:nth-child(2) img {
-    animation-delay: -2.5s;
-}
-
-main section:nth-child(3) img {
-    max-width: 30rem;
-    animation-delay: 2.5s;
 }
 
 #projects h1 {
@@ -141,28 +148,28 @@ main section:nth-child(3) img {
     text-align: center;
 }
 
-.project > a {
-  width: 100%;
-  position: relative;
-  background: url() 50% 50% no-repeat;
-  background-size: cover;
-  background-clip: content-box;
-  border-radius: 15px;
+.project>a {
+    width: 100%;
+    position: relative;
+    background: url() 50% 50% no-repeat;
+    background-size: cover;
+    background-clip: content-box;
+    border-radius: 15px;
 }
 
-.project > a:hover {
+.project>a:hover {
     transition: 0.15s ease-in-out;
     cursor: pointer;
     filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.7));
 }
 
-.project > a:before {
+.project>a:before {
     display: block;
     content: "";
     padding-top: 60%;
 }
 
-.project > a {
+.project>a {
     display: flex;
     flex-direction: column;
     transition: 0.25s ease-in-out;
@@ -174,18 +181,20 @@ main section:nth-child(3) img {
 }
 
 .info {
-    padding: 10px;
+    backdrop-filter: blur(8px);
+    padding: 32px 64px;
     background-color: rgb(0, 0, 0, 0.2);
-    max-width: 35rem;
+    max-width: 42rem;
     border-radius: 15px;
     transition: background-color 0.3s ease-in-out;
+    box-shadow: 1px 1px 16px rgba(200, 200, 200, 0.42);
 }
 
 .info:hover {
     background-color: rgb(0, 0, 0, 0.4);
 }
 
-.info > * {
+.info>* {
     padding: 0;
     margin: 2%;
 }
@@ -204,7 +213,9 @@ footer {
 @keyframes white-text-glow {
     from {
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.75);
-    } to {
+    }
+
+    to {
         text-shadow: 0 0 15px rgba(255, 255, 255, 0.75);
     }
 }
@@ -212,26 +223,36 @@ footer {
 @keyframes white-image-glow {
     from {
         filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.5));
-    } to {
+    }
+
+    to {
         filter: drop-shadow(0 0 35px rgba(255, 255, 255, 0.5));
     }
 }
 
 @keyframes floating {
     0% {
-        transform: translate(0,  0px);
-    } 50% {
+        transform: translate(0, 0px);
+    }
+
+    50% {
         transform: translate(0, 10px);
-    } 100% {
+    }
+
+    100% {
         transform: translate(0, 0px);
     }
 }
 
 @keyframes sweep {
     0% {
-        opacity: 0; margin-left: -10px
-    } 100% {
-        opacity: 1; margin-left: 0px
+        opacity: 0;
+        margin-left: -10px
+    }
+
+    100% {
+        opacity: 1;
+        margin-left: 0px
     }
 }
 
@@ -239,7 +260,9 @@ footer {
     0% {
         opacity: 0;
         transform: translateY(-1%);
-    } 100% {
+    }
+
+    100% {
         opacity: 1;
         transform: translateY(0);
     }
@@ -247,16 +270,18 @@ footer {
 }
 
 @media only screen and (max-width: 700px) {
+    .info {
+        padding: 32px;
+        background-color: rgba(0, 0, 0, 0);
+        transition: background-color 0.3s ease-in-out;
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+
     header {
         position: relative;
     }
 
     .project-grid {
         grid-template-columns: 1fr;
-    }
-
-    main section:nth-child(3) img {
-        animation-delay: 2.5s;
-        width: 100%;
     }
 }
