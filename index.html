@@ -1,231 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Le Website</title>
-        <script defer src="script.js"></script>
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
-            rel="stylesheet"
-        >
-    </head>
-    <body>
-        <canvas id="starfield"></canvas>
-        <header>
-            <div id="brand">
-                <div class="main">
-                    <strong>KV Le</strong>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Website</title>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="starfield"></canvas>
+    <header>
+        <div id="brand">
+            <div class="main">
+                <strong>KV Le</strong>
+            </div>
+            <div class="sub">
+                Software Developer and Reliability Engineer
+            </div>
+        </div>
+        <nav>
+            <a href="#me" rel="noopener noreferrer">Me</a>
+            <a href="#experience" rel="noopener noreferrer">Experience</a>
+            <a href="#contact" rel="noopener noreferrer">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <section id="me">
+            <img src="resources/learning.png" alt="Astronaut reading on a planet">
+            <div class="info">
+                <h1>About Me:</h1>
+                <p>
+                    Hello! My name is KV Le. I'm currently a SWE/SRE at TikTok! (I wear a lot of hats at this place
+                    🤣)
+                </p>
+                <p>
+                    I always want to learn more, whether it be Software-Related, Hardware-Related, or just Life-Related.
+                </p>
+                <p>
+                    I also love playing video games. Some of my favorites are:
+                    osu!, Valorant, Age of Empires II, and Minecraft. I'm always
+                    down for Badminton, Pickle Ball, or Tennis though! 🎾
+                </p>
+                <details>
+                    <summary>What I've been doing lately</summary>
+                    <ul>
+                        <li>Helping keep Children safe on TikTok 🚨</li>
+                        <li>Improving Operational Efficiency for Multimedia Moderation Pipelines 🎵</li>
+                        <li>Developing Monitoring Tools and Maintaining Environments with Hundreds of Microservices 🏗️
+                        </li>
+                        <li>Ensuring Custom Cloud Infrastructure is Healthy and Services are running at full capacity ☁️
+                        </li>
+                    </ul>
+                </details>
+            </div>
+        </section>
+        <section id="experience">
+            <img src="resources/working.png" alt="Astronaut on computer">
+            <div class="info">
+                <h1>Experience:</h1>
+                <p>
+                    I have had two full time engineering positions and
+                    three software engineer internships. I've also developed
+                    a multitude of small projects to help learn various
+                    different languages and technologies.
+                </p>
+                <p>
+                    When it comes to languages, I am very comfortable with
+                    Python, C#, Java, and JavaScript. I have also used
+                    SQL, Haskell, Lua, and Rust for various projects and
+                    learning exercises. I can ramp up fast in any language
+                    thrown at me (unless it's something like APL 🤣).
+                </p>
+                <p>
+                    As for technologies, I am comfortable with ReactJS,
+                    ExpressJS, Unity3D, ASP.NET, Git, MongoDB, Firebase,
+                    and Linux/Unix. I also have exposure to various SQL
+                    backends, AWS services, and PyTorch.
+                </p>
+                <p>
+                    I love to learn more so I'm never afraid to pick up
+                    something I'm not familiar with at a job. I believe that
+                    my current skills help me pick up technologies fairly
+                    quickly.
+                </p>
+                <p>
+                    <a href="https://www.linkedin.com/in/kvietcongle/" target="_blank">
+                        See my LinkedIn
+                    </a>
+                    <br />
+                    <a href="https://docs.google.com/document/d/e/2PACX-1vSyIYsfsA1wHdCNZrIcFrQ5sDEjGcQ5vXnOnM29ja3hArN1uAUOQHufN9zaRCfXCWrlqrWBwAaHS0OL/pub"
+                        target="_blank">
+                        Or see my resume here
+                    </a>
+                </p>
+            </div>
+        </section>
+        <section id="projects">
+            <img src="resources/kite.png" alt="Astronaut on flying rocket kite">
+            <h1>Some Projects:</h1>
+            <div class="project-grid">
+                <div class="project">
+                    <h2>PokeDraft</h2>
+                    <a href="https://poke-draft.vercel.app/" style="background-image:url('/resources/pokedraft.png')"
+                        rel="noopener noreferrer" target="_blank">
+                    </a>
+                    <p>
+                        A web app that provides an easy way for people to come together
+                        and draft Pokemon for competitive play.
+                        <a href="https://github.com/kvietcong/poke-draft" rel="noopener noreferrer" target="_blank">
+                            (Repo)
+                        </a>
+                    </p>
                 </div>
-                <div class="sub">
-                    Software Developer
+                <div class="project">
+                    <h2>Rusty Boids</h2>
+                    <a href="https://kvietcong.github.io/rusty-boids/"
+                        style="background-image:url('/resources/rusty-boids.png')" rel="noopener noreferrer"
+                        target="_blank">
+                    </a>
+                    <p>
+                        Boids Simulation using Bevy (Rust ECS Engine) and exported to WebAssembly.
+                        <a href="https://github.com/kvietcong/rusty-boids" rel="noopener noreferrer" target="_blank">
+                            (Repo)
+                        </a>
+                    </p>
+                </div>
+                <div class="project">
+                    <h2>The Abyss</h2>
+                    <a href="https://github.com/kvietcong/the-abyss"
+                        style="background-image:url('https://github.com/kvietcong/the-abyss/raw/master/docs/resources/inside.jpg')"
+                        rel="noopener noreferrer" target="_blank">
+                    </a>
+                    <p>
+                        A low-profile diode-less 36-key keyboard with nice!view support. I designed it with <a
+                            href="https://github.com/ergogen/ergogen" target="_blank"
+                            rel="noopener noreferrer">Ergogen</a>/<a href="https://www.kicad.org/" target="_blank"
+                            rel="noopener noreferrer">KiCad</a> and programmed it with <a href="https://zmk.dev/"
+                            target="_blank" rel="noopener noreferrer">ZMK</a>.
+                        <a href="https://github.com/kvietcong/the-abyss" rel="noopener noreferrer" target="_blank">
+                            (Repo)
+                        </a>
+                    </p>
+                </div>
+                <div class="project">
+                    <h2>Consumer Data Analysis 📊</h2>
+                    <a href="https://github.com/kvietcong/cse163-final/blob/master/report.pdf"
+                        style="background-image:url('/resources/industry.png')" rel="noopener noreferrer"
+                        target="_blank">
+                    </a>
+                    <p>
+                        An analysis on decades worth of Consumer data with over
+                        100,000 personal profiles. It also includes the usage of
+                        machine learning techniques for simple predictions.
+                        <a href="https://github.com/kvietcong/cse163-final" rel="noopener noreferrer" target="_blank">
+                            (Repo)
+                        </a>
+                    </p>
                 </div>
             </div>
-            <nav>
-                <a href="#me" rel="noopener noreferrer">Me</a>
-                <a href="#experience" rel="noopener noreferrer">Experience</a>
-                <a href="#contact" rel="noopener noreferrer">Contact</a>
-            </nav>
-        </header>
-        <main>
-            <section id="me">
-                <img src="resources/learning.png" alt="Astronaut reading on a planet">
-                <div class="info">
-                    <h1>About Me:</h1>
-                    <p>
-                        Hello! My name is KV Le. I'm currently an undergraduate
-                        at the University of Washington studying Computer Science
-                        and Systems. I always want to learn more, whether it be
-                        Software/Web Development, Machine Learning, or Algorithms
-                        and Data Structures.
-                    </p>
-                    <p>
-                        I also love playing video games. Some of my favorite are:
-                        osu!, CS:GO, Age of Empires II, and Minecraft. Tennis is
-                        also super fun! 🎾
-                    </p>
-                    <details>
-                        <summary>What I've been doing lately</summary>
-                        <ul>
-                            <li>Software Engineering at UKG for Fall 2021 💻</li>
-                            <li>Researching Genetic Modeling at UWT 🧬</li>
-                            <li>Looking for a Summer 2022 Internship 💼</li>
-                            <li>The usual school stuff 😅</li>
-                        </ul>
-                    </details>
-                </div>
-            </section>
-            <section id="experience">
-                <img src="resources/working.png" alt="Astronaut on computer">
-                <div class="info">
-                    <h1>Experience:</h1>
-                    <p>
-                        I have had three software engineer internships and a
-                        multitude of small projects to help learn various
-                        different languages and technologies.
-                    </p>
-                    <p>
-                        When it comes to languages, I am comfortable with
-                        Python 3, C#, Java, and JavaScript. I have also used
-                        SQL, Haskell, Lua, and Rust for various projects and
-                        learning exercises.
-                    </p>
-                    <p>
-                        As for technologies, I am comfortable with ReactJS,
-                        ExpressJS, Unity3D, ASP.NET, Git, MongoDB, Firebase,
-                        and Linux/Unix. I also have exposure to various SQL
-                        backends, AWS services, and PyTorch.
-                    </p>
-                    <p>
-                        I love to learn more so I'm never afraid to pick up
-                        something I'm not familiar with at a job. I believe that
-                        my current skills help me pick up technologies fairly
-                        quickly.
-                    </p>
-                    <p>
-                        <a href="/resources/resume.pdf" rel="noopener noreferrer" target="_blank">
-                            Download my full resume here
-                        </a>
-                    </p>
-                </div>
-            </section>
-            <section id="projects">
-                <img src="resources/kite.png" alt="Astronaut on flying rocket kite">
-                <h1>Projects:</h1>
-                <div class="project-grid">
-                    <div class="project">
-                        <h2>GoGo Recycling ♻</h2>
-                        <a
-                            href="https://gogo-recycling.web.app/"
-                            style="background-image:url('/resources/gogo-recycling.png')"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                        >
-                        </a>
-                        <p>
-                            A web app that provides an easy way for people to come together
-                            and share their experiences towards becoming sustainable.
-                            <a
-                                href="https://github.com/uw-info442c-au20/gogo-recycling"
-                                rel="noopener noreferrer"
-                                target="_blank"
-                            >
-                                [Repo]
-                            </a>
-                        </p>
-                    </div>
-                    <div class="project">
-                        <h2>Consumer Data Analysis 📊</h2>
-                        <a
-                            href="https://docs.google.com/document/d/1524UoFh8ioQ3Oac32oNhEHeTNDgBaA2aY6HEIIyLods"
-                            style="background-image:url('/resources/industry.png')"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                        >
-                        </a>
-                        <p>
-                            An analysis on decades worth of Consumer data with over
-                            100,000 personal profiles. It also includes the usage of
-                            machine learning techniques for simple predictions.
-                            <a
-                                href="https://github.com/kvietcong/cse163-final"
-                                rel="noopener noreferrer"
-                                target="_blank"
-                            >
-                                [Repo]
-                            </a>
-                        </p>
-                    </div>
-                    <div class="project">
-                        <h2>Sub Sinker 💥</h2>
-                        <a
-                            href="https://github.com/kvietcong/Sub-Sinker"
-                            style="background-image:url('/resources/sub-sinker.png')"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                        >
-                        </a>
-                        <p>
-                            A multiplayer game developed on Unity3D featuring
-                            procedurally generated maps
-                        </p>
-                    </div>
-                    <div class="project">
-                        <h2>Hot Takes 🔥</h2>
-                        <a
-                            href="https://le-hot-takes.herokuapp.com/"
-                            style="background-image:url('/resources/hot-takes.png')"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                        >
-                        </a>
-                        <p>
-                            A mock social media website run on ExpressJS and ReactJS
-                            that allows you to post your opinions and view others.
-                            (Note: Not Moderated/Filtered)
-                            <a
-                                href="https://github.com/kvietcong/hot-takes"
-                                rel="noopener noreferrer"
-                                target="_blank"
-                            >
-                                [Repo]
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section id="contact">
-                <img src="resources/rocket.png" alt="Astronaut on a rocket">
-                <div class="info">
-                    <h1>Contact Me:</h1>
-                    <p>
-                        Email:
-                        <a href="mailto:lecongkhoiviet+career@gmail.com" target="_blank">
-                            lecongkhoiviet+career@gmail.com
-                        </a>
-                        <br>
-                        LinkedIn:
-                        <a href="https://www.linkedin.com/in/kvietcongle/" target="_blank">
-                            @kvietcongle
-                        </a>
-                        <br>
-                        GitHub:
-                        <a href="https://github.com/kvietcong" target="_blank">
-                            @kvietcong
-                        </a>
-                        <br>
-                        Twitter:
-                        <a href="https://twitter.com/kvietcong" target="_blank">
-                            @kvietcong
-                        </a>
-                        <br>
-                        Phone Number: +1 (360) 813-8851
-                    </p>
-                </div>
-            </section>
-        </main>
-        <footer>
-            <div>
-                Copyright or Something XD ©️
+        </section>
+        <section id="contact">
+            <img src="resources/rocket.png" alt="Astronaut on a rocket">
+            <div class="info">
+                <h1>Contact Me:</h1>
+                <p>
+                    Email:
+                    <a href="mailto:lecongkhoiviet+career@gmail.com" target="_blank">
+                        lecongkhoiviet+career@gmail.com
+                    </a>
+                    <br>
+                    LinkedIn:
+                    <a href="https://www.linkedin.com/in/kvietcongle/" target="_blank">
+                        @kvietcongle
+                    </a>
+                    <br>
+                    GitHub:
+                    <a href="https://github.com/kvietcong" target="_blank">
+                        @kvietcong
+                    </a>
+                    <br>
+                    Twitter:
+                    <a href="https://twitter.com/kvietcong" target="_blank">
+                        @kvietcong
+                    </a>
+                    <br>
+                    Phone Number: +1 (360) 813-8851
+                </p>
             </div>
-            <div>
-                Drawings by catalyststuff (www.freepik.com) 🖼️
-            </div>
-            <div>
-                I hope the "interactive" starfield was noticeable lol ✨
-            </div>
-            <div>
-                Site made with HTML, CSS, 🍦 JS, and 💖 @
-                <a
-                    href="https://github.com/kvietcong/le-website"
-                    target="_blank"
-                >
-                    https://github.com/kvietcong/le-website
-                </a>
-            </div>
-        </footer>
-    </body>
+        </section>
+    </main>
+    <footer>
+        <div>Copyright or Something XD ©️</div>
+        <div>Drawings by catalyststuff (www.freepik.com) 🖼️</div>
+        <div>I hope the "interactive" starfield was noticeable lol ✨</div>
+        <div>
+            Site made with HTML, CSS, 🍦 JS, and 💖 @
+            <a href="https://github.com/kvietcong/le-website" target="_blank">
+                https://github.com/kvietcong/le-website
+            </a>
+        </div>
+    </footer>
+</body>
+
 </html>
